@@ -1,0 +1,92 @@
+.main {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.cardsContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    width: 90%;
+    flex-wrap: wrap;
+}
+
+.containerController {
+    width: 90%;
+    margin: 30px auto;
+}
+
+.containerBox {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.boxName {
+    background-color: lawngreen;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 0 10px 0 0;
+}
+
+.containerController .btnMenu {
+    height: 40px;
+    width: 170px;
+    margin: 10px 10px 0px 0;
+    border-radius: 5px;
+    border: 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    transition: .2s ease-in-out;
+    color: #000;
+}
+
+.containerController .btnMenu:hover {
+    background-color: #ccc;
+}
+
+.containerController .btnMenu.ativo {
+    background: linear-gradient(to right, #ED8F03, #FFB75E);
+    color: #fff;
+}
+
+.containerController .btnMenu .icons {
+    margin: 10px;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+@media (min-width: 600px) {
+    .main {
+        max-width: 1200px;
+        margin: 50px auto 0;
+        flex-direction: row-reverse
+    }
+
+    .containerController {
+        width: auto;
+        margin: 10px;
+    }
+
+    .cardsContainer { 
+        justify-content: unset;
+    }
+
+    .task {
+        padding: 11px;
+        margin-left: 60px;
+    }
+}
