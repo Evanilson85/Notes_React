@@ -1,0 +1,41 @@
+.profilesForms {
+    flex: 1;
+}
+
+.profiles {
+    height: auto;
+    background-color: none;
+    box-shadow: unset;
+    width: 100%;
+}
+
+.profiles img {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
+.profiles label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.profiles .icones {
+    position: absolute;
+}
+
+.files {
+    display: none;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
+@media (min-width: 600px) {
+    
+}

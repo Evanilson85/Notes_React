@@ -1,0 +1,35 @@
+.containerList {
+    padding: 0 15px;
+    height: 100%;
+    flex: 0 0 320px;
+}
+
+.containerList + div {
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.containerList header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 42px;
+}
+
+.containerList header h2 {
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+.containerList header button {
+    width: 43px;
+    height: 42px;
+    border-radius: 18px;
+    background:#ed8f03 ;
+    border: 0;
+    cursor: pointer;
+}
+
+.containerList ul {
+    margin-top: 30px;
+}

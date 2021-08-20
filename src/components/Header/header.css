@@ -9,6 +9,12 @@
     width: 50px;
 }
 
+.headerMobile img:last-child {
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
 .headerMobile .div {
     display: flex;
     align-items: center;

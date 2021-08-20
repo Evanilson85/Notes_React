@@ -24,7 +24,8 @@
 }
 
 .boxName {
-    background-color: lawngreen;
+    background-color: #f29a1c;
+    color: #fff;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -73,7 +74,7 @@
     .main {
         max-width: 1200px;
         margin: 50px auto 0;
-        flex-direction: row-reverse
+        flex-direction: row;
     }
 
     .containerController {
@@ -83,10 +84,12 @@
 
     .cardsContainer { 
         justify-content: unset;
+        flex-wrap: unset;
     }
 
     .task {
         padding: 11px;
         margin-left: 60px;
+        flex: 1;
     }
 }
