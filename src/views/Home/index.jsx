@@ -5,6 +5,8 @@ import Load from '../../components/Load'
 import Container from '../../components/Container'
 import List from '../../components/List'
 
+
+
 import './home.css'
 
 const Home = () => {
@@ -14,23 +16,27 @@ const Home = () => {
             id: 1,
             title: 'Tarefas 1',
             card: [
-                {
-                    tema: 'Tafera 1',
+                {   
+                    id: '1',
+                    tema: 'Lista 1',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 },
-                {
-                    tema: 'Tafera 12',
+                {   
+                    id: '2',
+                    tema: 'Lista 2',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 },
-                {
-                    tema: 'Tafera 13',
+                {   
+                    id: '3',
+                    tema: 'Lista 3',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 },
-                {
-                    tema: 'Tafera 14',
+                {   
+                    id: '4',
+                    tema: 'Lista 4',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 },
@@ -40,8 +46,9 @@ const Home = () => {
             id: 2,
             title: 'Tarefas em Processo',
             card: [
-                {
-                    tema: 'Tafera 1',
+                {   
+                    id: '5',
+                    tema: 'Lista 5',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 },
@@ -51,18 +58,21 @@ const Home = () => {
             id: 3,
             title: 'Tarefas Concluidos',
             card: [
-                {
-                    tema: 'Tafera 1',
+                {   
+                    id: '6',
+                    tema: 'Lista 6',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 },
-                {
-                    tema: 'Tafera 12',
+                {   
+                    id: '7',
+                    tema: 'Lista 7',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 },
-                {
-                    tema: 'Tafera 13',
+                {   
+                    id: '8',
+                    tema: 'Lista 8',
                     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
                     img: null
                 }
@@ -79,13 +89,9 @@ const Home = () => {
                 <div className='task'>
                     <h3>Minhas Tarefas</h3>
                     <div className='cardsContainer'>
-                        <Container>
-                            {teste.map(list => <List key={list.id} card={list.card} />)}
-
-                            {/* <List />
-                            <List />
-                            <List /> */}
-                        </Container> 
+                            <Container>
+                                {teste.map(list => <List key={list.id} card={list.card} colluns={teste} />)}
+                            </Container> 
                     </div>
                     {/* <Load/> */}
                 </div>
