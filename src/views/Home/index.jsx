@@ -5,8 +5,6 @@ import Load from '../../components/Load'
 import Container from '../../components/Container'
 import List from '../../components/List'
 
-
-
 import './home.css'
 
 const Home = () => {
@@ -85,13 +83,13 @@ const Home = () => {
         <>
             <Header/>
             <main className='main'>
-                        <Navegation />
+                    <Navegation />
                 <div className='task'>
                     <h3>Minhas Tarefas</h3>
                     <div className='cardsContainer'>
-                            <Container>
-                                {teste.map(list => <List key={list.id} card={list.card} colluns={teste} />)}
-                            </Container> 
+                        <Container>
+                            <List/>
+                        </Container> 
                     </div>
                     {/* <Load/> */}
                 </div>

@@ -1,81 +1,131 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MdAdd } from 'react-icons/md'
-import Card from '../Cards'
+import { VscEdit } from "react-icons/vsc";
+import { FcCheckmark } from "react-icons/fc";
 import './list.css'
-import imagen from '../../assets/images/avatar.png'
 
+import data from '../../service/data'
 
-import { DragDropContext, Droppable, Draggable  } from 'react-beautiful-dnd';
-    
-const List = ({card, colluns}) => {
+import Column from '../Column'
 
-    const [characters, setCharacters] = useState(card)
-    const [collun, setCollun] = useState(colluns)
-    const [idCollun, setIdCollun ] = useState(null)
+import { DragDropContext } from 'react-beautiful-dnd'
 
-    useEffect(()=>{
+const List = () => {
+
+    const [cardData, setCardData] = useState(data)
+    const [edit, setEdit] = useState(false)
+
+    const editar = useRef(null)
+    useEffect(() => {
+        //console.log(editar.current)
+
+        
 
     }, [])
 
     const handleOnDragEnd = (result) => {
-        const { destination, source, draggableId } = result
+       
         // destination para onde ele vai
         // source onde ele estava
         // draggableId o meu id
+        const { destination, source, draggableId } = result
 
-        // console.log(source.droppableId)
-        // console.log(source.droppableId, destination.droppableId)
+        // console.log(draggableId) tem que ser o mesmo do objeto ou card
 
         if (!destination) return;
         
-        const items = Array.from(characters);
-        const [reorderedItem] = items.splice(source.index, 1);
-        items.splice(destination.index, 0, reorderedItem);
+        if (destination.droppableId === source.droppableId && destination.index === source.index) return
+        
+        const start = cardData.columns[source.droppableId]
+        const finish = cardData.columns[destination.droppableId]
 
-        setCharacters(items)
+        if(start === finish) {
 
-        // console.log(characters)
+            const items = Array.from(start.card);
+            const [reorderedItem] = items.splice(result.source.index, 1);
+            items.splice(result.destination.index, 0, reorderedItem);
+            
+            const newColumn = {
+                ...start,
+                card: items
+            }
+
+            const newState = {
+                ...cardData,
+                columns: {
+                  ...cardData.columns,
+                  [newColumn.id]: newColumn
+                }
+            }
+            
+            setCardData(newState)
+
+            return  
+        }
+        
+        //! mudando de list
+        
+        const startMovi = Array.from(start.card)
+
+        startMovi.splice(result.source.index, 1)
+
+        const moviStart = {
+            ...start,
+            card: startMovi
+        }
+
+        const moviFinish = Array.from(finish.card)
+        
+        moviFinish.splice(destination.index, 0, draggableId)
+        // console.log(moviFinish)
+        
+        const newFinish = {
+            ...finish,
+            card: moviFinish
+        }
+
+        const newStateCollun = {
+            ...cardData,
+            columns: {
+              ...cardData.columns,
+              [moviStart.id]: moviStart,
+              [newFinish.id]: newFinish
+            }
+        }
+
+        setCardData(newStateCollun)
+
+        return
     }   
 
-    return(
-        <div className='containerList'>
-          <header>
-              <h2>Tarefas</h2>
-                <button>
-                    <MdAdd size={24} color='#ffff' />
-                </button>
-          </header>
+    const handleEdit = () => {
+        
+        let dados = data.columns
+        // console.log(Object.keys(dados).length)
+         
+    }
+
+    return (
           <DragDropContext onDragEnd={handleOnDragEnd}>
+                {cardData.columnOrder.map((id) => {
+                    const colunas = cardData.columns[id]
+                    const cards = colunas.card.map(item => cardData.tasks[item] )
             
-            <Droppable droppableId="characters">
-            
-                {(provided) => ( 
-                    <ul className='characters' ref={provided.innerRef} {...provided.droppableProps}>
-                        
-                    {characters.map(({id, tema, text, img}, index) => {
-                        return (
-                            <Draggable key={id} draggableId={id} index={index}>
-                                {(providedCards) => (
-                                    // <Card ref={providedCards.innerRef} {...providedCards.draggableProps} {...providedCards.dragHandleProps} key={id} tema={tema} text={text} img={img} />
-                                    <li className='box' ref={providedCards.innerRef} {...providedCards.draggableProps} {...providedCards.dragHandleProps} key={id} >
-                                        <header>
-                                            {tema}
-                                        </header>
-                                        <div className='box'>
-                                            <p> {text} </p>
-                                            <img src={img === null ? imagen : img} alt="capa" />
-                                        </div>
-                                    </li>
-                                 )}
-                            </Draggable> 
-                        )}
-                    )}
-                    {provided.placeholder}
-                </ul>
-                )}
-            </Droppable>
+                    return (
+                            
+                            <div key={colunas.id} className='containerList'>
+                            <header>
+                                {edit ? <input type="text" id={colunas.id} ref={editar} placeholder='Digite o seu tema' className='edit'/> : <h2>{colunas.title}</h2>}
+        
+                                <button id={colunas.id} onClick={handleEdit} > <VscEdit size={24} color='#ffff'  /></button>
+                                {/* <button> <FcCheckmark size={24} color='#ffff' /></button> */}
+                                <button> <MdAdd size={24} color='#ffff' /></button>
+                            </header>
+                                <Column key={colunas.id} colunas={colunas} cards={cards} />
+                            </div>  
+                    )
+                })}
           </DragDropContext>
-        </div>
     )
 }
 

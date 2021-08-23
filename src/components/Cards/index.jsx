@@ -1,22 +1,24 @@
 import './card.css'
 import imagen from '../../assets/images/avatar.png'
 
+import { Draggable } from 'react-beautiful-dnd'
 
-const Card = ({tema, text, img}) => {
+const Card = ({item, index}) => {
 
+  return (
 
-    return(
-        <div className='box' >
-            <header>
-               {tema}
-            </header>
+    <Draggable draggableId={item.id} index={index} >
+      {(providedCards) => (
+        <li className='box' ref={providedCards.innerRef} {...providedCards.draggableProps} {...providedCards.dragHandleProps} >
+          <header> {item.tema}</header>
           <div className='box'>
-            <p> {text} </p>
-
-            <img src={img === null ? imagen : img} alt="capa" />
+              <p> {item.text} </p>
+              <img src={item.img === null ? imagen : item.img} alt="capa" />
           </div>
-        </div>
-    )
+       </li>
+      )}
+    </Draggable>
+  )
 }
 
 export default Card
