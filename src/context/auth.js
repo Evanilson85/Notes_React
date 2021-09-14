@@ -9,6 +9,11 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loadAuth, setLoadAuth] = useState(false) //!cadastro
     const [load, setLoad] = useState(true)
+    const [modal, setModal] = useState({ visible: false })
+
+    const openModal = (payload) => setModal({...payload, visible: true})
+    const closeModal = () => setModal({ visible: false })
+
 
     useEffect(() => {
 
@@ -94,82 +99,14 @@ const AuthProvider = ({ children }) => {
     const sigOut = async () => {
         await firebase.auth().signOut()
         localStorage.removeItem('UserNotes')
+        localStorage.removeItem('cards')
         setUser(null)
     }
 
-    const cards = () => {
-        return [
-            {
-                id: 1,
-                title: 'Tarefas 1',
-                card: [
-                    {   
-                        id: '1',
-                        tema: 'Lista 1',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    },
-                    {   
-                        id: '2',
-                        tema: 'Lista 2',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    },
-                    {   
-                        id: '3',
-                        tema: 'Lista 3',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    },
-                    {   
-                        id: '4',
-                        tema: 'Lista 4',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    },
-                ]
-            },
-            {
-                id: 2,
-                title: 'Tarefas em Processo',
-                card: [
-                    {   
-                        id: '5',
-                        tema: 'Lista 5',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    },
-                ]
-            },
-            {
-                id: 3,
-                title: 'Tarefas Concluidos',
-                card: [
-                    {   
-                        id: '6',
-                        tema: 'Lista 6',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    },
-                    {   
-                        id: '7',
-                        tema: 'Lista 7',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    },
-                    {   
-                        id: '8',
-                        tema: 'Lista 8',
-                        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta facilis excepturi',
-                        img: null
-                    }
-                ]
-            },
-        ]
-    }
+    
 
     return(
-        <AuthContext.Provider value={{ signed: !!user, user, load, register, loadAuth, sigOut, login, storageUser, setUser, cards }}>
+        <AuthContext.Provider value={{ signed: !!user, user, load, register, loadAuth, sigOut, login, storageUser, setUser, modal, openModal, closeModal}}>
             { children }
         </AuthContext.Provider>
     )

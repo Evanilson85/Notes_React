@@ -22,12 +22,16 @@
 }
 
 .containerList header button {
-    width: 43px;
-    height: 42px;
-    border-radius: 18px;
+    width: 40px;
+    height: 40px;
     background:#ed8f03 ;
     border: 0;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 0 5px;
 }
 
 .containerList ul {
@@ -39,4 +43,5 @@
     border: 0;
     border-radius: 5px;
     padding: 0 0 0 5px;
+    background: #e2e2e2;
 }

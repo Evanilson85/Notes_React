@@ -9,13 +9,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   return (
-  //  <AuthProvider>  passando todas informaçoes do usuario
+  //AuthProvider  passando todas informaçoes do usuario
    <AuthProvider>
       <BrowserRouter>
           <ToastContainer autoClose={3000}/>
-       
           <Routes/>
-          
       </BrowserRouter>
    </AuthProvider> 
   )
