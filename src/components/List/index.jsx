@@ -2,16 +2,16 @@ import React, { useState, useContext, useEffect } from 'react';
 import { MdAdd } from 'react-icons/md'
 import { VscEdit } from "react-icons/vsc";
 import { FaCheck } from 'react-icons/fa';
+import { AuthContext } from '../../context/auth'
+import { DragDropContext } from 'react-beautiful-dnd'
 import Modal from './../Modal'
 import Column from '../Column'
 import Load from '../Load'
-import { AuthContext } from '../../context/auth'
-import { DragDropContext } from 'react-beautiful-dnd'
 import './list.css'
 
 const List = () => {
 
-	const [titleID, setTitleID] = useState({ '1': { id: 1, edit: false }, '2': { id: 2, edit: false }, '3': { id: 3, edit: false } })
+	const [titleID, setTitleID] = useState({ '0': { id: 0, edit: false }, '1': { id: 1, edit: false }, '2': { id: 2, edit: false } })
 	const [titulo, setTitulo] = useState('')
 	const [collum, setCollum] = useState([])
 	const [cardAll, setCardAll] = useState([])
@@ -37,18 +37,18 @@ const List = () => {
 	const create = () => {
 
 		const colunas = {
+			'0': {
+				id: '0',
+				title: 'Tarefas 123',
+				card: []
+			},
 			'1': {
 				id: '1',
-				title: 'Tarefas 123',
+				title: 'Tarefas em Processo',
 				card: []
 			},
 			'2': {
 				id: '2',
-				title: 'Tarefas em Processo',
-				card: []
-			},
-			'3': {
-				id: '3',
 				title: 'Tarefas Concluidos',
 				card: []
 			}
@@ -94,8 +94,8 @@ const List = () => {
 
 		if (destination.droppableId === source.droppableId && destination.index === source.index) return
 
-		let start = collum[(source.droppableId - 1)]
-		const finish = collum[(destination.droppableId - 1)]
+		let start = collum[(source.droppableId )]
+		const finish = collum[(destination.droppableId )]
 
 		if (start === finish) {
 
@@ -108,7 +108,7 @@ const List = () => {
 				card: items
 			}
 
-			collum[(newColumn.id - 1)] = newColumn
+			collum[(newColumn.id )] = newColumn
 
 			const newState = [
 				...collum
@@ -137,8 +137,8 @@ const List = () => {
 			card: moviFinish
 		}
 
-		collum[(moviStart.id - 1)] = moviStart // minha coluna atualizado sem o meu card
-		collum[(newFinish.id - 1)] = newFinish
+		collum[(moviStart.id )] = moviStart // minha coluna atualizado sem o meu card
+		collum[(newFinish.id )] = newFinish
 
 		setCollum([...collum])
 		storageUser(collum)
@@ -150,12 +150,20 @@ const List = () => {
 		localStorage.setItem('collunas', JSON.stringify(data))
 	}
 
-	const handleEdit = (id) => {
+	const handleCreate = (id) => {
 		setButtonID(id)
 		openModal()
 	}
 
 	const handleEditTitle = (id) => {
+
+		Object.values(titleID).forEach((item, index) => {
+			if(item.edit) {
+				item.edit = false
+				// console.log(item)
+				// setTitulo('')
+			}
+		})
 
 		let editText = titleID[id].edit
 
@@ -171,7 +179,13 @@ const List = () => {
 	}
 
 	const handleSaveTitle = (id, index) => {
+		
+		if(titulo === '') {
+			let val = titleID[id].edit = false
 
+			setTitleID({...titleID, val})
+			return
+		}
 		let collunsNew = []
 		let indexCollum = {
 			...collum[index],
@@ -187,8 +201,14 @@ const List = () => {
 			collunsNew.push(item)
 		})
 
+		let val = titleID[id].edit = false
+
+		setTitleID({...titleID, val})
+
+		// console.log(titleID)
+		storageUser(collunsNew)
 		setCollum(collunsNew)
-		handleEditTitle(id)
+		// handleEditTitle(id)
 		setTitulo('')
 	}
 
@@ -203,7 +223,7 @@ const List = () => {
 
 					return (
 						<div key={id} className='containerList'>
-							<header>
+							<header style={{background: '#f8f8f8'}}>
 								{
 									titleID[id].edit ?
 										<input type="text" placeholder='Digite o seu tema' className='edit' value={titulo} onChange={e => setTitulo(e.target.value)} />
@@ -217,7 +237,7 @@ const List = () => {
 											:
 											<button onClick={() => handleEditTitle(id)}> <VscEdit size={24} color='#ffff' /> </button>
 									}
-									<button onClick={() => handleEdit(id)}> <MdAdd size={24} color='#ffff' /> </button>
+									<button onClick={() => handleCreate(id)}> <MdAdd size={24} color='#ffff' /> </button>
 								</div>
 							</header>
 							<Column key={index} colunas={id.toString()} cards={cards2} />

@@ -18,6 +18,7 @@ const Modal = ({ idButton }) => {
 	const handleSubmit = (event) => {
 		
 		event.preventDefault()
+		// alert(idButton)
 		if (tema && cardMessage) {
 
 			let card = JSON.parse(storageGet('cards'))

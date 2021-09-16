@@ -47,7 +47,7 @@ const Login = () => {
                 
                 <button className='button' type='submit'>Fazer Login</button>
 
-                <Link to='/register'>Criar Conta</Link>
+                <Link to='/register' className='button link'>Criar Conta</Link>
            </form>
         </div>
     )

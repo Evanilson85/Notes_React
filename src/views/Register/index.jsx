@@ -56,7 +56,7 @@ const Register = () => {
                 
                 <button className='button' type='submit'>Criar Conta</button>
 
-                <Link to='/'>Fazer Login</Link>
+                <Link to='/'  className='button link'>Fazer Login</Link>
            </form>
         </div>
     )
