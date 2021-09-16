@@ -16,11 +16,15 @@ const List = () => {
 	const [collum, setCollum] = useState([])
 	const [cardAll, setCardAll] = useState([])
 	const [buttonID, setButtonID] = useState(null)
-	const { openModal, user } = useContext(AuthContext)
+	const { openModal, user, reload } = useContext(AuthContext)
 
 	useEffect(() => {
 		cards()
 	}, [])
+	
+	useEffect(() => {
+		cards()
+	}, [reload])
 
 	const storageCreate = (name, data) => {
 		localStorage.setItem(name, data)
@@ -69,7 +73,7 @@ const List = () => {
 
 	const cards = () => {
 
-		let card = JSON.parse(storageGet('cardsTeste'))
+		let card = JSON.parse(storageGet('cards'))
 		let total = {}
 
 		if (card) {
@@ -143,7 +147,7 @@ const List = () => {
 	}
 
 	const storageUser = (data) => {
-		localStorage.setItem('collun', JSON.stringify(data))
+		localStorage.setItem('collunas', JSON.stringify(data))
 	}
 
 	const handleEdit = (id) => {

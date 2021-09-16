@@ -1,11 +1,7 @@
 const Container = ({children}) => {
-
     return(
-        <>
-            {children}
-        </>
+        <> {children} </>
     )
-
 }
 
 export default Container

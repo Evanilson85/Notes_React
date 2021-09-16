@@ -1,8 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from '../../context/auth'
-
 import { Link, useLocation} from 'react-router-dom'
-
 import { BsBoxArrowInRight, BsPersonCheck, BsTable } from "react-icons/bs";
 
 const Navegation = () => {

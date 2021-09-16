@@ -1,18 +1,20 @@
 .box {
-    /* height: 96px;
-    width: 158px; */
     margin: 5px;
     border-radius: 5px;
-    /* background: linear-gradient(225deg, #e6e6e6, #ffffff); */
-    box-shadow: 0px 1px 4px 0 rgba(192, 208, 230, 0.8);
-    /* 20px -20px 60px #ffffff;
-    background-color: #fcb150; */
+    box-shadow: 0px 1px 20px 0px rgb(192 208 230 / 80%);
     position: relative;
     background-color: #fff;
-    padding: 15px;
     margin-bottom: 10px;
-    border-top: 20px solid rgba(230, 236, 245, 0.4);
+    border-bottom: 20px;
     cursor: grab;
+
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 3px 4px 20px 7px rgb(162 167 173 / 80%);
+    position: relative;
+    background-color: #fafafa;
+    margin-bottom: 25px;
+    border-bottom: 20px;
 }
 
 .remove {
@@ -22,6 +24,7 @@
     background-color: transparent;
     box-shadow: none;
     cursor: grabbing;
+
 }
 
 .remove p,
@@ -33,12 +36,24 @@
 .box header {
     /* position: absolute; */
     line-height: 20px;
-    background-color: slateblue;
+    /* background-color: slateblue; */
+    background-color: #ed8f03;
     color: #fff;
+    padding: 15px;
+    border-radius: 5px 5px 0 0;
 }
 
 .box p {
-    font-weight: 500 ;
+    font-weight: 500;
+    cursor: pointer;
+
+    font-weight: 500;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+    padding: 20px 20px 20px 0;
 }
 
 .box img {
@@ -48,6 +63,13 @@
     margin-top: 5px;
 }
 
+.boxContainer {
+    /* height: 165px; */
+    padding: 15px;
+    width: 266px;
+}
+
+
 @media (min-width: 780px) {
     .box {
         /* width: 175px; */
@@ -55,5 +77,21 @@
 }
 
 .color {
-    background-color: skyblue;
+    border: 1px solid rgb(253, 253, 253);
+    border-radius: 5px;
+    background-color: #fffffff6;
+    box-shadow: 0px 0px 5px 5px rgb(192 208 230 / 80%);
+}
+
+.deletes {
+    margin: 0 !important;
+    background: none !important;
+    border: 1px solid !important;
+    width: 75px !important;
+    height: 35px !important;
+    transition: .1s ease-in-out;
+}
+
+.deletes:hover {
+    background: rgba(122, 119, 119, 0.616) !important;
 }
