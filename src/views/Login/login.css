@@ -63,7 +63,6 @@
     border: 0;
     border-radius: 5px;
     background: #e3e4e4;
-    /* box-shadow: 0px 0px 6px; */
     padding: 10px 0 10px 35px;
     margin: 15px 0;
     font-size: 18px;
@@ -76,7 +75,6 @@
     border: 0;
     border-radius: 5px;
     background: #e3e4e4;
-    /* box-shadow: 0px 0px 6px; */
     padding: 24px 12px;
     margin: 15px 0;
     font-size: 18px;
@@ -93,7 +91,6 @@
     border: 0;
     border-radius: 5px;
     background: #fca103;
-    /* box-shadow: 0px 0px 6px; */
     padding: 10px;
     cursor: pointer;
     transition: ease-in-out .2s;
@@ -101,7 +98,6 @@
 }
 
 .button.link {
-    /* height: 40px; */
     width: 50% !important;
     margin: 10px;
     display: flex;
@@ -113,12 +109,6 @@
 
 .button:hover {
     background: #fca1035e;
-}
-
-.form a {
-    /* position: relative;
-    left: 150px;
-    top: 16px; */
 }
 
 @media (min-width: 789px) {

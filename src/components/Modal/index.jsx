@@ -2,24 +2,19 @@ import { useContext, useState } from 'react'
 import 'antd/dist/antd.css'
 import { Modal as ModalComponent } from 'antd'
 import { AuthContext } from '../../context/auth'
-import { BsPerson } from "react-icons/bs";
-import { BiMessageDots } from "react-icons/bi";
-import capa from '../../assets/images/capa.jpg'
+import { BiMessageDots } from "react-icons/bi"
 import { toast } from 'react-toastify'
 
 const Modal = ({ idButton }) => {
 
 	const [tema, setTema] = useState('')
 	const [cardMessage, setCardMessage] = useState('')
-	const [image, setImage] = useState(null)
 	const [colorcard, setColorcard] = useState('')
-	const [validation, setValidation] = useState(true)
 
-	const { modal: { message, visible }, closeModal, reload, createCard } = useContext(AuthContext)
+	const { modal: { visible }, closeModal, reload, createCard } = useContext(AuthContext)
 
 	const handleSubmit = (event) => {
 	
-
 		event.preventDefault()
 	
 		if (!tema || !cardMessage) {
@@ -47,7 +42,6 @@ const Modal = ({ idButton }) => {
 			id: tema,
 			tema: tema,
 			text: cardMessage,
-			img: image,
 			color: colorcard,
 			indexCollun: idButton
 		}

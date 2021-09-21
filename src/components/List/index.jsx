@@ -119,12 +119,10 @@ const List = () => {
 			return
 		}
 
-		//! mudando de list
-
 		const startMovi = Array.from(start.card)
 
-		startMovi.splice(result.source.index, 1)//! me retorna a minha lista onde estava sem ele
-		const moviStart = { //! minha coluna sem o meu card
+		startMovi.splice(result.source.index, 1)
+		const moviStart = { 
 			...start,
 			card: startMovi
 		}
@@ -137,7 +135,7 @@ const List = () => {
 			card: moviFinish
 		}
 
-		collum[(moviStart.id )] = moviStart // minha coluna atualizado sem o meu card
+		collum[(moviStart.id )] = moviStart
 		collum[(newFinish.id )] = newFinish
 
 		setCollum([...collum])
@@ -160,8 +158,6 @@ const List = () => {
 		Object.values(titleID).forEach((item, index) => {
 			if(item.edit) {
 				item.edit = false
-				// console.log(item)
-				// setTitulo('')
 			}
 		})
 
@@ -204,11 +200,8 @@ const List = () => {
 		let val = titleID[id].edit = false
 
 		setTitleID({...titleID, val})
-
-		// console.log(titleID)
 		storageUser(collunsNew)
 		setCollum(collunsNew)
-		// handleEditTitle(id)
 		setTitulo('')
 	}
 
@@ -219,7 +212,7 @@ const List = () => {
 				{collum && collum.map(({ id, title }, index) => {
 
 					const colunas = collum[index]
-					const cards2 = colunas.card.map((item, index) => cardAll[item])
+					const cards2 = colunas.card.map((item) => cardAll[item])
 
 					return (
 						<div key={id} className='containerList'>

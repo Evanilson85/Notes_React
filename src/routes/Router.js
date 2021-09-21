@@ -10,11 +10,11 @@ const RouterConfig = ({ component: Component, isPrivate, ...rest }) => {
       return <div></div>
     } 
 
-    if(!signed && isPrivate) { //! se não estiver logado e for privado retorna pra login
+    if(!signed && isPrivate) { 
       return <Redirect to='/'/>
     }
       
-    if(signed && !isPrivate) { //! se tiver logado e a rota não for privada retorna pra Home
+    if(signed && !isPrivate) { 
       return <Redirect to='/home' />
     }
 

@@ -35,7 +35,7 @@ const Card = ({ item, index }) => {
 		
 		Object.values(convertCollun).forEach(item => {
 			item.card.forEach((i, index) => {
-				if(i == id) {
+				if(i === id) {
 				 	item.card.splice(index, 1)
 					 storageCreate('cards', JSON.stringify(convertData))
 					 storageCreate('collunas', JSON.stringify(convertCollun))

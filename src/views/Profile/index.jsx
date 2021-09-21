@@ -30,26 +30,26 @@ const Profile = () => {
         const currentId = user.id
 
         await firebase.storage().ref(`profile/${currentId}/${image.name}`).put(image)
-        .then( async () => {
-            await firebase.storage().ref(`profile/${currentId}`)
-            .child(image.name)
-            .getDownloadURL()
-            .then( async (url) => {
-                await firebase.firestore().collection('users').doc(user.id).update({ avatarUrl: url, name: name })
-                .then(() => {
-                    let data = { ...user, avatarUrl: url, name: name }
+            .then(async () => {
+                await firebase.storage().ref(`profile/${currentId}`)
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(async (url) => {
+                        await firebase.firestore().collection('users').doc(user.id).update({ avatarUrl: url, name: name })
+                            .then(() => {
+                                let data = { ...user, avatarUrl: url, name: name }
 
-                    setUser(data)
-                    storageUser(data)
-                    setLoading(false)
-                    toast.success('Foto atualizado com Sucesso!')
-                })
+                                setUser(data)
+                                storageUser(data)
+                                setLoading(false)
+                                toast.success('Foto atualizado com Sucesso!')
+                            })
+                    })
+            }).catch(err => {
+                console.log(err)
+                setLoading(false)
+                toast.error('Ops algo deu errado!')
             })
-        }).catch(err => {
-            console.log(err)
-            setLoading(false)
-            toast.error('Ops algo deu errado!')
-        })
 
     }
 
@@ -58,25 +58,25 @@ const Profile = () => {
         event.preventDefault()
         setLoading(true)
 
-        if(image === null) {
-            if(name !== '') {
-                await firebase.firestore().collection('users').doc(user.id).update({name: name})
-                .then(() => {
-    
-                    let data = { ...user, name: name}
-    
-                    setUser(data)
-                    storageUser(data)
-                    toast.success('Nome atualizado com Sucesso! ')
-                    setLoading(false)
+        if (image === null) {
+            if (name !== '') {
+                await firebase.firestore().collection('users').doc(user.id).update({ name: name })
+                    .then(() => {
 
-                })
-                .catch(err => {
-                    console.log(err)
-                    setLoading(false)
-                    toast.error('Ops algo deu errado!')
-                })
-                
+                        let data = { ...user, name: name }
+
+                        setUser(data)
+                        storageUser(data)
+                        toast.success('Nome atualizado com Sucesso! ')
+                        setLoading(false)
+
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        setLoading(false)
+                        toast.error('Ops algo deu errado!')
+                    })
+
             } else {
                 toast.error('O seu nome não pode ser vazio!')
                 setLoading(false)
@@ -93,32 +93,32 @@ const Profile = () => {
 
         const { files } = event.target
 
-        if(files) {
-            setImage(files[0]) // Pegar o nome do arquivo 
+        if (files) {
+            setImage(files[0])
             setAvatarUser(URL.createObjectURL(files[0]))
         }
 
     }
 
-    return(
-        <>  
-            <Header/>
+    return (
+        <>
+            <Header />
             <main className='main'>
-                <Navegation/>
+                <Navegation />
                 {
                     loading ? (
-                        <Load/>
+                        <Load />
                     ) : (
 
                         <div className='profilesForms'>
                             <form className='form profiles' onSubmit={handleUpdate}>
-                                <div> 
+                                <div>
                                     <label className='label-avatar'>
-                                        <input className='files' type='file' onChange={handleFile} accept='image/*'/> <br/>
+                                        <input className='files' type='file' onChange={handleFile} accept='image/*' /> <br />
                                         {avatarUser === null ?
-                                            <img src={avatar} width='250' height='250' alt='foto de Perfil'/>
+                                            <img src={avatar} width='250' height='250' alt='foto de Perfil' />
                                             :
-                                            <img src={avatarUser} width='250' height='250' alt='foto de Perfil'/>
+                                            <img src={avatarUser} width='250' height='250' alt='foto de Perfil' />
                                         }
                                     </label>
                                 </div>
@@ -127,10 +127,10 @@ const Profile = () => {
                                     <BsPerson size={20} className='icons' />
                                     <input type='text' placeholder='Alterar o nome' value={name} onChange={(e) => setName(e.target.value)} />
                                 </div>
-                                
+
                                 <div>
                                     <AiOutlineMail size={20} className='icons' />
-                                    <input type='email' className='disabled' disabled placeholder='e-mail' value={email} onChange={(e) => setEmail(e.target.value)}  />
+                                    <input type='email' className='disabled' disabled placeholder='e-mail' value={email} onChange={(e) => setEmail(e.target.value)} />
                                 </div>
 
                                 <button className='button' type='submit'>Salvar</button>

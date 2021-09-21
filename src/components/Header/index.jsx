@@ -14,7 +14,7 @@ const Header = () => {
             <header>
                 <div className='headerMobile'>
                     <div className='div'>
-                        <img src={logo} />
+                        <img src={logo} alt='logo' />
                         <h1>Notes</h1>
                     </div>
                     <div className='avatarIcon'>
