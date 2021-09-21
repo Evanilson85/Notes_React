@@ -10,7 +10,7 @@ const Navegation = () => {
 
     return(      
            <div className='containerController'>
-               <h3>Sua Area de Trabalho</h3>
+               <h3>Sua Área de Trabalho</h3>
 
                 <div className='containerBox'>
                     <div className="boxName">

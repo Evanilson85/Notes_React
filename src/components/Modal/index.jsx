@@ -3,6 +3,7 @@ import 'antd/dist/antd.css'
 import { Modal as ModalComponent } from 'antd'
 import { AuthContext } from '../../context/auth'
 import { BsPerson } from "react-icons/bs";
+import { BiMessageDots } from "react-icons/bi";
 import capa from '../../assets/images/capa.jpg'
 import { toast } from 'react-toastify'
 
@@ -12,54 +13,67 @@ const Modal = ({ idButton }) => {
 	const [cardMessage, setCardMessage] = useState('')
 	const [image, setImage] = useState(null)
 	const [colorcard, setColorcard] = useState('')
+	const [validation, setValidation] = useState(true)
 
 	const { modal: { message, visible }, closeModal, reload, createCard } = useContext(AuthContext)
 
 	const handleSubmit = (event) => {
-		
+	
+
 		event.preventDefault()
-		// alert(idButton)
-		if (tema && cardMessage) {
-
-			let card = JSON.parse(storageGet('cards'))
-			let columns = JSON.parse(storageGet('collunas'))
-			let idColluna = columns[idButton].card
-			let newColumns = [...idColluna]
-			let create
-			let createJson = {
-				id: tema,
-				tema: tema,
-				text: cardMessage,
-				img: image,
-				color: colorcard,
-				indexCollun: idButton
-			}
 	
-			if (card) {
-				create = { ...card }
-			} else {
-				create = {}
-			}
-	
-			createCard(!reload)
-	
-			create[createJson.id] = createJson
-	
-			storageCreate('cards', JSON.stringify(create))
-	
-			newColumns.push(tema)
-			columns[idButton].card = newColumns
-			storageCreate('collunas', JSON.stringify(columns))
-	
-			setTema('')
-			setCardMessage('')
-			closeModal()
-
+		if (!tema || !cardMessage) {
+			toast.error('Todos os campos são obrigatorios!')
 			return
-		} 
-		
-		toast.error('Todos os campos são obrigatorios!')
+		}
 
+		let card = JSON.parse(storageGet('cards'))
+		let valuesTema = []
+
+		Object.values(card).forEach(value => {
+			valuesTema.push(value.tema)
+		})
+
+		if(valuesTema.includes(tema)){
+			toast.error('Tema já existe!')
+			return
+		}
+
+		let columns = JSON.parse(storageGet('collunas'))
+		let idColluna = columns[idButton].card
+		let newColumns = [...idColluna]
+		let create
+		let createJson = {
+			id: tema,
+			tema: tema,
+			text: cardMessage,
+			img: image,
+			color: colorcard,
+			indexCollun: idButton
+		}
+
+		if (card) {
+			create = { ...card }
+		} else {
+			create = {}
+		}
+
+		createCard(!reload)
+
+		create[createJson.id] = createJson
+		
+		storageCreate('cards', JSON.stringify(create))
+
+		newColumns.push(tema)
+		columns[idButton].card = newColumns
+		storageCreate('collunas', JSON.stringify(columns))
+
+		setTema('')
+		setCardMessage('')
+		closeModal()
+
+		return
+	
 	}
 
 	const storageGet = name => {
@@ -92,7 +106,6 @@ const Modal = ({ idButton }) => {
 		let dad = event.target.offsetParent
 		let elements = dad.querySelectorAll('.radios');
 		[...elements].forEach(item => {
-			// console.log(item)
 			item.classList.remove('activo')
 		})
 
@@ -105,11 +118,7 @@ const Modal = ({ idButton }) => {
 			<div className='profilesForms'>
 				<form className='form profiles' onSubmit={handleSubmit}>
 					<div>
-						{/* <label className='label-avatar'>
-							<input className='files' type='file' accept='image/*' /> <br />
-							<img src={capa} style={{ width: '100%', borderRadius: 0 }} height='250' alt='foto de Perfil' />
-						</label> */}
-						<h2>Selecione a cor do Card</h2>
+						<h2>Selecione a cor do seu Card</h2>
 						<div className="containerRadios">
 							{color.map(({cor, title}) => (
 								<div className='radios ' title={title} key={cor} onClick={changeColor} style={{background: cor}} ></div>
@@ -117,7 +126,7 @@ const Modal = ({ idButton }) => {
 						</div>
 					</div>
 					<div>
-						<BsPerson size={20} className='icons' />
+						<BiMessageDots size={20} className='icons' />
 						<input type='text' placeholder='Tema' value={tema} onChange={(event) => { setTema(event.target.value) }} />
 					</div>
 					<div>

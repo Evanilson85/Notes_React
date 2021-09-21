@@ -16,7 +16,7 @@ const List = () => {
 	const [collum, setCollum] = useState([])
 	const [cardAll, setCardAll] = useState([])
 	const [buttonID, setButtonID] = useState(null)
-	const { openModal, user, reload } = useContext(AuthContext)
+	const { openModal, reload } = useContext(AuthContext)
 
 	useEffect(() => {
 		cards()
@@ -39,7 +39,7 @@ const List = () => {
 		const colunas = {
 			'0': {
 				id: '0',
-				title: 'Tarefas 123',
+				title: 'Tarefas',
 				card: []
 			},
 			'1': {

@@ -34,19 +34,19 @@ const Register = () => {
         <div className='containerForm'>
            <div className='div'>
                <img src={logo} alt="Logo" />
-               <h1>myNotes</h1>
+               <h1>Notes</h1>
            </div>
            <form onSubmit={handleSubmit} action="" className='form register'>
 
                 <h1>Fazer Cadastro no App</h1>
                 <div>
                     <BsPerson size={20} className='icons' />
-                    <input type='text' placeholder='insira o nome' value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type='text' placeholder='Insira o nome' value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 
                 <div>
                     <AiOutlineMail size={20} className='icons' />
-                    <input type='email' placeholder='insira o e-mail' value={email} onChange={(e) => setEmail(e.target.value)}  />
+                    <input type='email' placeholder='Insira o e-mail' value={email} onChange={(e) => setEmail(e.target.value)}  />
                 </div>
 
                 <div>

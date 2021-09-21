@@ -7,23 +7,21 @@ import avatar from '../../assets/images/avatar.png'
 
 
 const Header = () => {
-
     const { user } = useContext(AuthContext)
 
-    return(
+    return (
         <>
-           <header>
-               <div className='headerMobile'>
+            <header>
+                <div className='headerMobile'>
                     <div className='div'>
                         <img src={logo} />
-                        <h1>myNotes</h1>
+                        <h1>Notes</h1>
                     </div>
-
                     <div className='avatarIcon'>
-                         <img src={user.avatarUrl === null ? avatar : user.avatarUrl } alt='avatar' /> 
+                        <img src={user.avatarUrl === null ? avatar : user.avatarUrl} alt='avatar' />
                     </div>
-               </div>
-           </header>
+                </div>
+            </header>
         </>
     )
 

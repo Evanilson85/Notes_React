@@ -29,7 +29,7 @@ const Login = () => {
         <div className='containerForm'>
            <div className='div'>
                <img src={logo} alt="Logo" />
-               <h1>myNotes</h1>
+               <h1>Notes</h1>
            </div>
            <form onSubmit={submitLogin} className='form'>
 
@@ -37,7 +37,7 @@ const Login = () => {
 
                 <div>
                     <AiOutlineMail size={20} className='icons' />
-                    <input type='email' placeholder='insira o e-mail' value={email} onChange={(e) => {setEmail(e.target.value)}} />
+                    <input type='email' placeholder='Insira o e-mail' value={email} onChange={(e) => {setEmail(e.target.value)}} />
                 </div>
 
                 <div>
