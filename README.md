@@ -2,11 +2,9 @@ Passo a Passo
 
 1 - git clone https://github.com/Evanilson85/Notes_React.git
 
-2 - cd Netflix-Clone-React
+2 - npm install
 
-3 - npm install
-
-4 para iniciar o Projeto
+3 para iniciar o Projeto
 
 npm run start
 
